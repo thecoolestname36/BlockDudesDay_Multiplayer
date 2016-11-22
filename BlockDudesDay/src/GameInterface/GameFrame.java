@@ -12,6 +12,40 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+///////////////////////* Comment/Uncomment to run as windowed JFrame *///////////////////////////
+public class GameFrame extends JFrame {
+
+    public static Frame gameFrame;
+    public GameGUI gameGUI;
+    public static int REFRESH_RATE = 60;
+    
+
+    /**
+     * @return
+     */
+    public GameFrame(String[] args) {
+        add(new GameGUI());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+        setVisible(true);
+    }
+            
+    /**
+     * @param args the command line arguments
+     */
+    public static String[] argies;
+    public static synchronized void main(String[] args) {
+        argies = args;
+        new Thread() {
+            @Override
+            public void run() {
+                new GameFrame(new String[]{"Blank", argies.toString()});
+            }
+        }.start();
+        
+    }
+}
+
 /////////////////////////* Comment/Uncomment to run as appleet *///////////////////////////
 ///**
 // * @author Bradley Scott Cutshall
@@ -95,38 +129,3 @@ import javax.swing.SwingUtilities;
 //        }.start();
 //    }
 //}
-
-
-///////////////////////* Comment/Uncomment to run as windowed JFrame *///////////////////////////
-public class GameFrame extends JFrame {
-
-    public static Frame gameFrame;
-    public GameGUI gameGUI;
-    public static int REFRESH_RATE = 60;
-    
-
-    /**
-     * @return
-     */
-    public GameFrame(String[] args) {
-        add(new GameGUI());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setVisible(true);
-    }
-            
-    /**
-     * @param args the command line arguments
-     */
-    public static String[] argies;
-    public static synchronized void main(String[] args) {
-        argies = args;
-        new Thread() {
-            @Override
-            public void run() {
-                new GameFrame(new String[]{"Blank", argies.toString()});
-            }
-        }.start();
-        
-    }
-}
